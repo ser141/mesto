@@ -1,0 +1,14 @@
+.element__like-icon {
+    width: 22px;
+    height: 19px;
+    background: transparent url(../../../images/like-icon.svg);
+    border: 0;
+    align-self: flex-end;
+    cursor: pointer;
+    transition: opacity linear .5s;
+}
+
+.element__like-icon:hover {
+    opacity: .5;
+}
+
