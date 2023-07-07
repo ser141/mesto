@@ -1,0 +1,14 @@
+.form__item {
+    width: 100%;
+    padding: 0 0 13px 0;
+    border: 0;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.form__item:last-of-type {
+    padding-top: 30px;
+    
+}
