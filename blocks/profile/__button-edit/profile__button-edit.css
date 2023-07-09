@@ -2,11 +2,29 @@
     width: 24px;
     height: 24px;
     padding: 0;
+    margin-bottom: 10px;
     background: transparent;
     border: 0;
     background-image: url(../../../images/Edit__Button.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     cursor: pointer;
     grid-column: 2;
     grid-row: 1;
     align-self: flex-end;
+    transition: opacity linear .5s;
+}
+
+.profile__button-edit:hover {
+    opacity: .6;
+}
+
+
+@media screen and (max-width: 400px) {
+    .profile__button-edit {
+        width: 18px;
+        height: 18px;
+        margin-bottom: 5px;
+    }
 }

@@ -1,7 +1,12 @@
 .element__like-icon {
     width: 22px;
     height: 19px;
+    padding: 0;
+    margin-bottom: 3px;
     background: transparent url(../../../images/like-icon.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     border: 0;
     align-self: flex-end;
     cursor: pointer;

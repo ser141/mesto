@@ -5,6 +5,9 @@
     top: -40px;
     right: -40px;
     background: transparent url(../../../images/close-btn__icon.svg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border: 0;
     cursor: pointer;
     transition: opacity linear .4s;

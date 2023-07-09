@@ -10,86 +10,96 @@
 
     <div class="content">
         <header class="header">
-            <a href="#"><img class="header__logo" src="images/header__logo.svg" alt="Логотип"></a>
+            <a class="header__logo" href="#"></a>
         </header>
         
         <main>
-            <div class="profile">
+            <section class="profile">
                 <img class="profile__avatar" src="images/avatar.jpg" alt="Аватар">
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <p class="profile__activity">Исследователь океана</p>
-                    <button class="profile__button-edit"></button>
+                    <button type="button" class="profile__button-edit" aria-label="Кнопка редактирования профиля"></button>
                 </div>
-                <button class="profile__button-add"></button>
-            </div>
+                <button type="button" class="profile__button-add" aria-label="Кнопка добавления карточек"></button>
+            </section>
 
             <section>
                 <ul class="elements">
-                    <li class="element">
-                        <img class="element__image" src="images/karachaevsk.jpg" alt="Карачаевск">
-                        <div class="element__info">
-                            <h2 class="element__title">Карачаевск</h2>
-                            <button class="element__like-icon"></button>
-                        </div>
+                    <li>
+                        <article class="element">
+                            <img class="element__image" src="images/karachaevsk.jpg" alt="Карачаевск">
+                            <div class="element__info">
+                                <h2 class="element__title">Карачаевск</h2>
+                                <button type="button" class="element__like-icon" aria-label="Кнопка лайка"></button>
+                            </div>
+                        </article>
                     </li>
-                    <li class="element">
-                        <img class="element__image" src="images/elbrus.jpg" alt="Эльбрус">
-                        <div class="element__info">
-                            <h2 class="element__title">Эльбрус</h2>
-                            <button class="element__like-icon"></button>
-                        </div>
+                    <li>
+                        <article class="element">
+                            <img class="element__image" src="images/elbrus.jpg" alt="Эльбрус">
+                            <div class="element__info">
+                                <h2 class="element__title">Эльбрус</h2>
+                                <button type="button" class="element__like-icon" aria-label="Кнопка лайка"></button>
+                            </div>
+                        </article>
                     </li>
-                    <li class="element">
-                        <img class="element__image" src="images/dombay.jpg" alt="Домбай">
-                        <div class="element__info">
-                            <h2 class="element__title">Домбай</h2>
-                            <button class="element__like-icon"></button>
-                        </div>
+                    <li>
+                        <article class="element">
+                            <img class="element__image" src="images/dombay.jpg" alt="Домбай">
+                            <div class="element__info">
+                                <h2 class="element__title">Домбай</h2>
+                                <button type="button" class="element__like-icon" aria-label="Кнопка лайка"></button>
+                            </div>
+                        </article>
                     </li>
-                    <li class="element">
-                        <img class="element__image" src="images/taiga-min.jpg" alt="Тайга">
-                        <div class="element__info">
-                            <h2 class="element__title">Тайга</h2>
-                            <button class="element__like-icon"></button>
-                        </div>
+                    <li>
+                        <article class="element">
+                            <img class="element__image" src="images/taiga-min.jpg" alt="Тайга">
+                            <div class="element__info">
+                                <h2 class="element__title">Тайга</h2>
+                                <button type="button" class="element__like-icon" aria-label="Кнопка лайка"></button>
+                            </div>
+                        </article>
                     </li>
-                    <li class="element">
-                        <img class="element__image" src="images/konduki-min.jpg" alt="Кондуки">
-                        <div class="element__info">
-                            <h2 class="element__title">Кондуки</h2>
-                            <button class="element__like-icon"></button>
-                        </div>
+                    <li>
+                        <article class="element">
+                            <img class="element__image" src="images/konduki-min.jpg" alt="Кондуки">
+                            <div class="element__info">
+                                <h2 class="element__title">Кондуки</h2>
+                                <button type="button" class="element__like-icon" aria-label="Кнопка лайка"></button>
+                            </div>
+                        </article>
                     </li>
-                    <li class="element">
-                        <img class="element__image" src="images/gamstul-min.jpg" alt="Гамстуль">
-                        <div class="element__info">
-                            <h2 class="element__title">Гамстуль</h2>
-                            <button class="element__like-icon"></button>
-                        </div>
+                    <li>
+                        <article class="element">
+                            <img class="element__image" src="images/gamstul-min.jpg" alt="Гамстуль">
+                            <div class="element__info">
+                                <h2 class="element__title">Гамстуль</h2>
+                                <button type="button" class="element__like-icon" aria-label="Кнопка лайка"></button>
+                            </div>
+                        </article>
                     </li>
                 </ul>
             </section>
         </main>
 
         <footer class="footer">
-            <p class="footer__copyright">&copy;2023 Mesto Russia</p>
+            <p class="footer__copyright" lang="en">&copy;2023 Mesto Russia</p>
         </footer>
 
         <div class="popup">
             <div class="popup__container">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="form">
-                    <fieldset class="form__input-container">
-                        <input type="text" placeholder="Жак-Ив Кусто" maxlength="20" class="form__item form__item_el_name">
-                        <input type="text" placeholder="Исследователь океана" maxlength="40" class="form__item form__item_el_job">
-                    </fieldset>
+                <form name="popupForm" class="form">
+                        <input name="formName" type="text" placeholder="Ваше имя"  class="form__item form__item_el_name">
+                        <input name="formJob" type="text" placeholder="Сфера деятельности"  class="form__item form__item_el_job">
                     <button type="submit" class="form__button">Сохранить</button>
                 </form>
-                <button class="popup__close-btn"></button>
+                <button type="button" class="popup__close-btn" aria-label="Кнопка закрытия попапа"></button>
             </div>
         </div>
     </div>
-    <script src="index.js"></script>
+    <script src="/scripts/index.js" defer></script>
 </body>
 </html>
