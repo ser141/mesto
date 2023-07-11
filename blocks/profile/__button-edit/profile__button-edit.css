@@ -4,11 +4,11 @@
     padding: 0;
     margin-bottom: 10px;
     background: transparent;
-    border: 0;
     background-image: url(../../../images/Edit__Button.svg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 10px 10px;
     background-position: center;
+    border: 1px solid #fff;
     cursor: pointer;
     grid-column: 2;
     grid-row: 1;
@@ -25,6 +25,7 @@
     .profile__button-edit {
         width: 18px;
         height: 18px;
+        background-size: 7.5px 7.5px;
         margin-bottom: 5px;
     }
 }
