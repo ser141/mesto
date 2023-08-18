@@ -47,9 +47,14 @@
         <div class="popup popup_type_edit">
             <div class="popup__container">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form name="popupForm" class="popup__form popup__form_type_edit">
-                        <input name="formName" type="text" placeholder="Ваше имя"  class="popup__input popup__input_el_name">
-                        <input name="formJob" type="text" placeholder="Сфера деятельности"  class="popup__input popup__input_el_job">
+                <form name="popupForm" class="popup__form popup__form_type_edit" novalidate>
+                    
+                        <input name="formName" id="formName" type="text" minlength="2" maxlength="40" required placeholder="Ваше имя"  class="popup__input popup__input_el_name">
+                        <span id="formName-error" class="popup__input-error"></span>
+
+                        <input name="formJob" id="formJob" type="text" minlength="2" maxlength="200" required placeholder="Сфера деятельности"  class="popup__input popup__input_el_job" >
+                        <span id="formJob-error" class="popup__input-error"></span>
+
                     <button type="submit" class="popup__save-btn">Сохранить</button>
                 </form>
                 <button type="button" class="popup__close-btn" aria-label="Кнопка закрытия попапа"></button>
@@ -59,9 +64,12 @@
         <div class="popup popup_type_add">
             <div class="popup__container">
                 <h2 class="popup__title">Новое место</h2>
-                <form name="popupAddForm" class="popup__form popup__form_type_add">
-                    <input name="formAddName" type="text" placeholder="Название" class="popup__input popup__input_el_title">
-                    <input name="formAddLink" type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_el_link">
+                <form name="popupAddForm" class="popup__form popup__form_type_add" novalidate>
+                    <input required name="formAddName" id="formAddName" type="text" minlength="2" maxlength="20" placeholder="Название" class="popup__input popup__input_el_title">
+                    <span id="formAddName-error" class="popup__input-error"></span>
+
+                    <input required name="formAddLink" id="formAddLink" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_el_link">
+                    <span id="formAddLink-error" class="popup__input-error"></span>
                     <button type="submit" class="popup__save-btn">Создать</button>
                 </form>
                 <button type="button" class="popup__close-btn" aria-label="Кнопка закрытия попапа"></button>
@@ -78,5 +86,6 @@
     </div>
     <script  src="scripts/cards.js" defer></script>
     <script  src="scripts/index.js" defer></script>
+    <script  src="scripts/validate.js" defer></script>
 </body>
 </html>
