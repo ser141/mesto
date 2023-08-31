@@ -1,8 +1,11 @@
+import { Card } from './Card.js'
+import { FormValidator } from './FormValidator.js'
+
 const editButton = document.querySelector('.profile__button-edit');
 const closeButtons = document.querySelectorAll('.popup__close-btn');
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_add');
-const popupImage = document.querySelector('.popup_type_image');
+export const popupImage = document.querySelector('.popup_type_image');
 const addButton = document.querySelector('.profile__button-add');
 const profileForm = document.querySelector('.popup__form_type_edit');
 const addForm = document.querySelector('.popup__form_type_add');
@@ -14,73 +17,69 @@ const container = document.querySelector('.elements');
 const template = document.querySelector('.cards');
 const titleInput = addForm.querySelector('.popup__input_el_title');
 const linkInput = addForm.querySelector('.popup__input_el_link');
-const popupImageItem = document.querySelector('.popup__image');
-const popupImageText = document.querySelector('.popup__image-decription');
+export const popupImageItem = document.querySelector('.popup__image');
+export const popupImageText = document.querySelector('.popup__image-decription');
 
+const validationSettings = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-btn',
+    inactiveButtonClass: 'popup__save-btn_disabled',
+    inputErrorClass: 'popup__input_type_error',
+  }; 
 
-// создание карточки через шаблон
+  const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ];
 
-const createElByTemplate = (data) => {
-    const el = template.content.cloneNode(true);
-    const title = el.querySelector('.element__title');
-    title.textContent = data.name;
-    const image = el.querySelector('.element__image');
-    image.src = data.link
-    image.alt = title.textContent;
+//   экземпляр рендера карточек
+  initialCards.forEach((item) => {
+    const card = new Card(item, '.cards');
+    const cardElement = card.generateCard();
 
-    const deleteBtn = el.querySelector('.element__delete-btn');
-    deleteBtn.addEventListener('click', deleteEl)
+    document.querySelector('.elements').append(cardElement);
+});
 
-    const likeBtn = el.querySelector('.element__like-icon');
-    likeBtn.addEventListener('click', likeEl);
+//  экземпляры валидации форм
 
-    image.addEventListener('click', function(){
-      openPopup(popupImage);
-      popupImageItem.src = data.link;
-      popupImageItem.alt = data.name;
-      popupImageText.textContent = data.name;
-    });
+const profileFormValidation = new FormValidator(validationSettings, profileForm);
+profileFormValidation.enableValidation()
 
-    return el;
+const addFormValidation = new FormValidator(validationSettings, addForm);
+addFormValidation.enableValidation();
 
-}
-
-
-
-// удаление карточки
-
-const deleteEl = (e) => {
-  const el = e.target.closest('.element');
-  el.remove();
-}
-
-// лайк карточки
-
-const likeEl = (e) => {
-  const el = e.target.closest('.element__like-icon');
-  el.classList.toggle('element__like-icon_active');
-}
-
-// рендер карточек
-
-const render = () => {
-    initialCards.forEach((item) => {
-        container.append(createElByTemplate(item));
-    });
-    
-}
-
-render();
-
-// создание карточки
+// создание карточек  
 
 const createEl = (evt) => {
     evt.preventDefault();
-    const newEl = createElByTemplate({name: titleInput.value, link: linkInput.value});
-    container.prepend(newEl);
+    const newCard = new Card({name: titleInput.value, link: linkInput.value}, '.cards');
+    const cardElement = newCard.generateCard()
+    document.querySelector('.elements').prepend(cardElement);
     addForm.reset();
-    evt.submitter.classList.add('popup__save-btn_disabled');
-    evt.submitter.disabled = true;
+    addFormValidation.disableSubmitButton();
     closePopup(popupAdd);
 }
 
@@ -90,7 +89,7 @@ addForm.addEventListener('submit', createEl);
 
 // функция открытия попапа
 
-function openPopup(popupElement) {
+export function openPopup(popupElement) {
     popupElement.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupByEsc);
 }
@@ -129,6 +128,8 @@ editButton.addEventListener('click', function() {
     jobInput.value = profileJob.textContent;
 });
 
+// поиск через forEach кнопки закрытия в попапах
+
 closeButtons.forEach((button) => {
     const popup = button.closest('.popup');
     button.addEventListener('click', () => closePopup(popup));
@@ -141,7 +142,7 @@ addButton.addEventListener('click', function() {
     openPopup(popupAdd);
 })
 
-
+// форма редактирования профиля
 
 function handleProfileForm (evt) {
     evt.preventDefault();
