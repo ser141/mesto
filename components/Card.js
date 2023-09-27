@@ -1,10 +1,12 @@
-import { popupImage, popupImageItem, popupImageText, openPopup } from "./index.js";
+import { popupImage, popupImageItem, popupImageText } from "../pages/index.js";
+
 
 export class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, handleCardclick) {
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardclick;
     }
     // получение темлэйта
 
@@ -39,13 +41,7 @@ export class Card {
     _deleteBtn() {
         this._element.remove()
 }
-    _handlePopupOpen() {
-        openPopup(popupImage)
-        popupImageItem.src = this._link;
-        popupImageItem.alt = this._name;
-        popupImageText.textContent = this._name;
-    }
-
+  
     _setEventListeners() {
         // лайк
         this._element.querySelector('.element__like-icon').addEventListener('click', () => {
@@ -56,7 +52,7 @@ export class Card {
             this._deleteBtn()
         });
         this._image.addEventListener('click', () => {
-            this._handlePopupOpen();
+            this._handleCardClick(this._link, this._name);
         })
     }
 
