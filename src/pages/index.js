@@ -5,6 +5,8 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
+import '../pages/index.css';
+
 /// константы /////////////////////////////////////////////
 const editButton = document.querySelector('.profile__button-edit');
 export const popupImage = document.querySelector('.popup_type_image');
