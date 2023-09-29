@@ -80,17 +80,32 @@ const validationSettings = {
 ///////////////////////////////////////////////////////
 
 ////////рендер карточек ///////////////////////////////////////
+const createEl = (item) => {
+  const card = new Card(item, '.cards', handleCardClick);
+  const cardElement = card.generateCard();
+ cardList.addItem(cardElement)
 
-const defaultCardList = new Section ({
+}
+
+
+const cardList = new Section ({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, '.cards', handleCardClick);
-    const cardElement = card.generateCard();
-    defaultCardList.addItem(cardElement)
+    createEl(item);
+
   }
 }, '.elements')
 
-defaultCardList.renderItems()
+cardList.renderItems()
+
+const openAddPopup = new PopupWithForm({
+  popupSelector: '.popup_type_add',
+   formSubmit: (item) => {
+    createEl(item)
+    addFormValidation.disableSubmitButton()
+   }
+  })
+  openAddPopup.setEventListeners()
 /////////////////////////////////////////////////////////////
 
 
@@ -114,18 +129,8 @@ addButton.addEventListener('click', function() {
 })
 
 // создание карточек  
-const createEl = () => {
-  const newCard = new Card({name: titleInput.value, link: linkInput.value}, '.cards', handleCardClick);
-  const cardElement = newCard.generateCard()
-  document.querySelector('.elements').prepend(cardElement);
 
-}
 
-const openAddPopup = new PopupWithForm({
-popupSelector: '.popup_type_add',
- formSubmit: createEl
-})
-openAddPopup.setEventListeners()
 
 ///////////////////////////////////////////////////////////
 
