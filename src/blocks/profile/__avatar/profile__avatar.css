@@ -4,16 +4,7 @@
     object-fit: cover;
     display: block;
     border-radius: 50%;
+    position: relative;
+    z-index: -1;
 }
 
-@media screen and (max-width: 880px) {
-    .profile__avatar {
-        margin-left: 27px;
-    }
-}
-
-@media screen and (max-width: 810px) {
-    .profile__avatar {
-        margin: 0;
-    }
-}
