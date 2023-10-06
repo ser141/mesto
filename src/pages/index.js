@@ -8,6 +8,10 @@ import Api from '../components/Api.js';
 import '../pages/index.css';
 import { data } from 'autoprefixer';
 import PopupDelete from '../components/PopupDelete.js';
+import { editButton, popupImage, addButton, profileForm, addForm, avatarForm, nameInput, jobInput, popupImageItem, popupImageText, validationSettings } from '../utils/constants.js';
+
+
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-76',
   headers: {
@@ -15,32 +19,6 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 }); 
-
-
-
-/// константы /////////////////////////////////////////////
-const editButton = document.querySelector('.profile__button-edit');
-export const popupImage = document.querySelector('.popup_type_image');
-const addButton = document.querySelector('.profile__button-add');
-const profileForm = document.querySelector('.popup__form_type_edit');
-const addForm = document.querySelector('.popup__form_type_add');
-const avatarForm = document.querySelector('.popup__form_type_avatar')
-const nameInput = profileForm.querySelector('.popup__input_el_name');
-const jobInput = profileForm.querySelector('.popup__input_el_job');
-export const popupImageItem = document.querySelector('.popup__image');
-export const popupImageText = document.querySelector('.popup__image-decription');
-
-
-
-const validationSettings = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save-btn',
-    inactiveButtonClass: 'popup__save-btn_disabled',
-    inputErrorClass: 'popup__input_type_error',
-  }; 
-
- ///////////////////////////////////////////////////////////////////
 
  /// информация пользователя ///////////////////////////////
   const user = new UserInfo({
@@ -56,8 +34,10 @@ const validationSettings = {
         about: userData.about,
         userId: userData._id,
         avatar: userData.avatar,
-      });
+      })
       cardList.renderItems(cardData)
+  }).catch((error) => {
+    console.log(`Ошибка: ${error.status}, ${error.message}`)
   })
 
 
@@ -110,6 +90,7 @@ const createEl = (item) => {
         popupDelete.confiramtionHandler(() => {
           api.deleteCard(card.getCardId()).then(() => {
             deleteCard.remove()
+            popupDelete.close()
           }).catch((error) => {
             console.log(`Ошибка: ${error.status}, ${error.message}`)
           })
@@ -134,13 +115,14 @@ const openAddPopup = new PopupWithForm({
     openAddPopup.saving(true)
     api.createNewCard({name: item.name, link: item.link}).then((newCard) => {
       createEl(newCard)
+      openAddPopup.close()
     }).catch((error) => {
       console.log(`Ошибка: ${error.status}, ${error.message}`)
     }).finally(() => {
       openAddPopup.saving(false)
     })
     
-    addFormValidation.disableSubmitButton()
+    
    }
   })
   openAddPopup.setEventListeners()
@@ -165,6 +147,7 @@ avatarvalidation.enableValidation()
 
 addButton.addEventListener('click', function() {
     openAddPopup.open();
+    addFormValidation.disableSubmitButton()
 })
 
 
@@ -175,6 +158,7 @@ editButton.addEventListener('click', function() {
   const userInfo = user.getUserInfo();
   nameInput.value = userInfo.userName;
   jobInput.value = userInfo.about;
+  profileFormValidation.disableSubmitButton()
 });
 
 const openEditPopup = new PopupWithForm({
@@ -183,6 +167,7 @@ const openEditPopup = new PopupWithForm({
     openEditPopup.saving(true)
    api.updateUserInfo({name: formData.userName, about: formData.about}).then((updatedData) => {
     user.setUserInfo(updatedData)
+    openEditPopup.close()
    }).catch((error) => {
     console.log(`Ошибка: ${error.status}, ${error.message}`)
   })
@@ -206,7 +191,7 @@ const setAvatar = new PopupWithForm({
     .finally(() => {
       setAvatar.saving(false)
     })
-    avatarvalidation.disableSubmitButton()
+    
   }
 })
 
@@ -215,6 +200,7 @@ setAvatar.setEventListeners()
 const avatarBtn = document.querySelector('.profile__avatar-btn')
 avatarBtn.addEventListener('click', () => {
   setAvatar.open()
+  avatarvalidation.disableSubmitButton()
 })
 
 
