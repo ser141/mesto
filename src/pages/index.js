@@ -187,6 +187,7 @@ const setAvatar = new PopupWithForm({
     setAvatar.saving(true)
     api.setAvatar({avatar: formData.avatar}).then((updatedData) => {
       user.setUserInfo(updatedData)
+      setAvatar.close()
     }).catch(err => console.log(err))
     .finally(() => {
       setAvatar.saving(false)
